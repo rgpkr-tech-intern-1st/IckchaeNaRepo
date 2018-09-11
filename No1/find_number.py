@@ -1,4 +1,6 @@
-import subprocess, sys
+import sys
+import subprocess
+import find_number_const as const
 
 
 def binary_search(low_int, high_int):
@@ -6,22 +8,20 @@ def binary_search(low_int, high_int):
 
     result = subprocess.check_output(["python", "guess.zip", str(guess_num)])
 
-    if result == greater:
+    if result == const.GREATER:
         low_int = guess_num
-        binary_search(low_int, high_int)
+        return binary_search(low_int, high_int)
 
-    elif result == less:
+    elif result == const.LESS:
         high_int = guess_num
-        binary_search(low_int, high_int)
+        return binary_search(low_int, high_int)
 
     else:
-        print(result)
+        return guess_num
 
 
-greater = "The value is greater than your guess.\n"
-less = "The value is less than your guess.\n"
-
-binary_search(-sys.maxint, sys.maxint)
+if __name__ == '__main__':
+    binary_search(-sys.maxint, sys.maxint)
 
 
 
